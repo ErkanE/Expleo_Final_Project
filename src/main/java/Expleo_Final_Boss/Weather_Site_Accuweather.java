@@ -25,17 +25,14 @@ public class Weather_Site_Accuweather {
     private static StringBuffer verificationErrors = new StringBuffer();
     Weather_Site_News24 news24 = new Weather_Site_News24();
 
-    @Before
-    public void setUp() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        String baseUrl = "https://www.accuweather.com/en/za/johannesburg/305448/daily-weather-forecast/305448";
-        driver.get(baseUrl);
-    }
-
     @Test
     public static AccuweatherPageObject getAccuweather() {
+            System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
+            driver = new ChromeDriver();
+            driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+            String baseUrl = "https://www.accuweather.com/en/za/johannesburg/305448/daily-weather-forecast/305448";
+            driver.get(baseUrl);
+
 
             baseUrl = "https://www.accuweather.com/en/za/johannesburg/305448/daily-weather-forecast/305448";
             driver.get(baseUrl);
@@ -46,7 +43,7 @@ public class Weather_Site_Accuweather {
             AccuweatherPageObject1.addMaxTemp(0, Integer.parseInt(Temp_Temperature.substring(1,3)));
             // Get Min Temp for Day 1
             Temp_Temperature = driver.findElement(By.xpath("/html/body/div/div[5]/div/div[1]/div/div[1]/a[1]/div[2]/span[2]")).getAttribute("innerHTML");
-            AccuweatherPageObject1.addMinTemp(0, Integer.parseInt(Temp_Temperature.substring(3,4)));
+            AccuweatherPageObject1.addMinTemp(0, Integer.parseInt(Temp_Temperature.substring(3)));
 
             // Get Max Temp for Day 2
             Temp_Temperature = driver.findElement(By.xpath("/html/body/div/div[5]/div/div[1]/div/div[1]/a[2]/div[2]/span[1]")).getAttribute("innerHTML");
@@ -79,14 +76,13 @@ public class Weather_Site_Accuweather {
             // Print Results
             System.out.println("Accuweather Forecast:");
             AccuweatherPageObject1.printBoth();
+            driver.quit();
 
             return AccuweatherPageObject1;
         }
 
-
     @After
     public void tearDown() throws Exception {
-        //driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);

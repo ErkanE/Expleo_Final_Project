@@ -21,13 +21,13 @@ public class Weather_Site_News24 {
 
         @Before
         public void setUp() throws Exception {
-            System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
-            driver = new ChromeDriver();
-            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         }
 
         @Test
         public static WeatherNews24PageObject getWeatherNews24Forecast() throws Exception {
+            System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
+            driver = new ChromeDriver();
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
             baseUrl = "http://weather.news24.com/";
             driver.get(baseUrl);
@@ -70,18 +70,18 @@ public class Weather_Site_News24 {
             News24PageObject.addMaxTemp(4, Integer.parseInt(Temp_Temperature.substring(0,2)));
             // Get Min Temp for Day 5
             Temp_Temperature = driver.findElement(By.xpath(".//*[@id=\"forecastContent\"]/table/tbody/tr[7]/td[5]")).getAttribute("innerHTML");
-            News24PageObject.addMinTemp(4, Integer.parseInt(Temp_Temperature.substring(0,2)));
+            News24PageObject.addMinTemp(4, Integer.parseInt(Temp_Temperature.substring(0,1)));
 
             // Print Results
             System.out.println("Weather News 24 Forecast:");
             News24PageObject.printBoth();
+            driver.quit();
 
             return News24PageObject;
         }
 
         @After
         public void tearDown() throws Exception {
-            driver.quit();
             String verificationErrorString = verificationErrors.toString();
             if (!"".equals(verificationErrorString)) {
                 fail(verificationErrorString);
