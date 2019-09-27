@@ -18,11 +18,11 @@ import static org.junit.Assert.fail;
 
 public class Weather_Site_Accuweather {
 
-    private String Temp_Temperature;
-    private WebDriver driver;
-    private String baseUrl;
-    private boolean acceptNextAlert = true;
-    private StringBuffer verificationErrors = new StringBuffer();
+    private static String Temp_Temperature;
+    private static WebDriver driver;
+    private static String baseUrl;
+    private static boolean acceptNextAlert = true;
+    private static StringBuffer verificationErrors = new StringBuffer();
     Weather_Site_News24 news24 = new Weather_Site_News24();
 
     @Before
@@ -35,7 +35,7 @@ public class Weather_Site_Accuweather {
     }
 
     @Test
-    public void getAccuweather() {
+    public static AccuweatherPageObject getAccuweather() {
 
             baseUrl = "https://www.accuweather.com/en/za/johannesburg/305448/daily-weather-forecast/305448";
             driver.get(baseUrl);
@@ -79,6 +79,8 @@ public class Weather_Site_Accuweather {
             // Print Results
             System.out.println("Accuweather Forecast:");
             AccuweatherPageObject1.printBoth();
+
+            return AccuweatherPageObject1;
         }
 
 

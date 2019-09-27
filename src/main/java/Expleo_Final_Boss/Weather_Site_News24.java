@@ -13,10 +13,10 @@ import static junit.framework.TestCase.fail;
 
 
 public class Weather_Site_News24 {
-        private String Temp_Temperature;
-        private String baseUrl;
-        private WebDriver driver;
-        private StringBuffer verificationErrors = new StringBuffer();
+        private static String Temp_Temperature;
+        private static String baseUrl;
+        private static WebDriver driver;
+        private static StringBuffer verificationErrors = new StringBuffer();
         WeatherNews24PageObject News24PageObject = new WeatherNews24PageObject();
 
         @Before
@@ -27,7 +27,7 @@ public class Weather_Site_News24 {
         }
 
         @Test
-        public void getWeatherNews24Forecast() throws Exception {
+        public static WeatherNews24PageObject getWeatherNews24Forecast() throws Exception {
 
             baseUrl = "http://weather.news24.com/";
             driver.get(baseUrl);
@@ -75,6 +75,8 @@ public class Weather_Site_News24 {
             // Print Results
             System.out.println("Weather News 24 Forecast:");
             News24PageObject.printBoth();
+
+            return News24PageObject;
         }
 
         @After
